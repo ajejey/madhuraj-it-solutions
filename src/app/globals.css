@@ -2,9 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+    --color-primary: 91 33 182;
+    --color-primary-hover: 76 29 149;
+    --color-secondary: 15 118 110;
+    --color-secondary-hover: 14 105 100;
+    --color-accent: 217 119 6;
+    --color-accent-hover: 196 106 6;
+    --color-slate: 51 65 85;
+    --color-cool: 241 245 249;
+    --color-success: 132 204 22;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,4 +33,37 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-montserrat {
+  font-family: var(--font-montserrat);
+}
+
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
+.text-gradient-tech {
+  @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+}
+
+.text-gradient-accent {
+  @apply bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }
