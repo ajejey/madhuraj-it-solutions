@@ -1,6 +1,6 @@
 export const services = [
   {
-    id: 'cctv-surveillance',
+    id: 'cctv',
     title: 'CCTV Surveillance & Security Systems',
     shortDescription: 'Professional CCTV installation and security solutions for homes and businesses',
     description: `We provide end-to-end CCTV surveillance solutions tailored to your security needs. Our expert team handles everything from consultation to installation and maintenance.`,
@@ -48,7 +48,7 @@ export const services = [
     icon: 'Laptop',
   },
   {
-    id: 'hardware-services',
+    id: 'hardware-sales',
     title: 'Hardware Repair & Services',
     shortDescription: 'Expert repair services for all your computer hardware needs',
     description: `Professional repair services for motherboards, monitors, printers, and UPS systems. Our skilled technicians ensure quick and reliable fixes.`,
@@ -64,7 +64,7 @@ export const services = [
     icon: 'Tool',
   },
   {
-    id: 'networking',
+    id: 'network-solutions',
     title: 'Networking Solutions',
     shortDescription: 'Complete networking solutions for businesses',
     description: `Comprehensive networking solutions including setup, maintenance, and troubleshooting. We ensure your network is fast, secure, and reliable.`,
@@ -80,19 +80,19 @@ export const services = [
     icon: 'Network',
   },
   {
-    id: 'data-recovery',
-    title: 'Data Recovery',
-    shortDescription: 'Professional data recovery services',
-    description: `Specialized data recovery services for all storage devices. We help recover your valuable data from crashed or damaged storage devices.`,
+    id: 'printer-services',
+    title: 'Printer Services',
+    shortDescription: 'Expert printer repair, maintenance, and support',
+    description: `Comprehensive printer repair, maintenance, and support services for all major brands. From troubleshooting to complete overhauls, we keep your printing infrastructure running smoothly.`,
     features: [
-      'Hard Drive Recovery',
-      'SSD Data Recovery',
-      'RAID Recovery',
-      'Secure Data Transfer',
-      'Emergency Services',
-      'Confidentiality Assured'
+      'Repair & Maintenance',
+      'Printer Setup',
+      'Consumables & Support',
+      'Quick Response',
+      'Quality Service',
+      'Customer First'
     ],
-    image: '/images/services/data-recovery.jpg',
-    icon: 'Database',
+    image: '/images/services/printer-services.jpg',
+    icon: 'Printer',
   }
 ];

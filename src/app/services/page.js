@@ -1,7 +1,6 @@
 import ServiceHero from './components/ServiceHero';
 import ServiceCategories from './components/ServiceCategories';
 import Testimonials from './components/Testimonials';
-import CallToAction from './components/CallToAction';
 
 export const metadata = {
   title: 'Services - Madhuraj System Solutions',
@@ -10,11 +9,9 @@ export const metadata = {
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen">
+    <div className="bg-white">
       <ServiceHero />
       <ServiceCategories />
-      <Testimonials />
-      <CallToAction />
-    </main>
+    </div>
   );
 }

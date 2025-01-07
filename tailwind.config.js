@@ -9,34 +9,41 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#4C1D95', // Slightly darker purple
-          hover: '#3B1477',
+          DEFAULT: '#07195F', // Deep Navy Blue
+          hover: '#051347',
+          light: '#1E3A8A',
         },
         secondary: {
-          DEFAULT: '#0EA5E9', // Modern Cyan/Sky Blue
-          hover: '#0284C7',
+          DEFAULT: '#00A9FF', // Bright Sky Blue
+          hover: '#0096E5',
+          light: '#33B9FF',
         },
         accent: {
-          DEFAULT: '#06B6D4', // Bright Cyan
-          hover: '#0891B2',
+          DEFAULT: '#FB923C', // Vibrant Orange
+          hover: '#F97316',
+          light: '#FDBA74',
         },
         slate: {
           DEFAULT: '#334155',
+          light: '#64748B',
         },
         cool: {
           DEFAULT: '#F1F5F9',
+          dark: '#E2E8F0',
         },
         success: {
-          DEFAULT: '#84CC16', // Sage
+          DEFAULT: '#22C55E', // Fresh Green
+          hover: '#16A34A',
         },
       },
       gradients: {
-        'tech': 'linear-gradient(to right, #5B21B6, #06B6D4)',
-        'accent': 'linear-gradient(to right, #0EA5E9, #5B21B6)',
+        'tech': 'linear-gradient(to right, #07195F, #0369A1)',
+        'accent': 'linear-gradient(to right, #FB923C, #07195F)',
+        'blue': 'linear-gradient(to bottom, #07195F, #1E3A8A)',
       },
       fontFamily: {
-        sans: ['var(--font-roboto)', 'system-ui', 'sans-serif'],
-        serif: ['var(--font-dm-serif)', 'Georgia', 'serif'],
+        montserrat: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
+        playfair: ['var(--font-playfair)', 'Georgia', 'serif'],
       },
       container: {
         center: true,
