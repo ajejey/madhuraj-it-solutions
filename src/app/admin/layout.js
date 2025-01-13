@@ -42,8 +42,14 @@ const SIDEBAR_ITEMS = [
 
 export default async function AdminLayout({ children }) {
   try {
-    // Uncomment when authentication is ready
-    await requireRole(['admin']);
+    console.log("Entering admin layout");
+    const user = await requireRole(['admin']);
+    console.log("Admin role verified for user:", user);
+
+    if (!user) {
+      console.log("No user found, redirecting to login");
+      redirect('/login');
+    }
 
     return (
       <div className="flex min-h-screen bg-gray-50">
@@ -84,7 +90,19 @@ export default async function AdminLayout({ children }) {
       </div>
     );
   } catch (error) {
-    console.error("error in admin layout", error);
-    redirect('/login');
+    console.error("Error in admin layout:", {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    });
+    
+    // If it's an authentication error, redirect to login
+    if (error.message === 'Authentication required' || error.message === 'Unauthorized') {
+      console.log("Authentication error, redirecting to login");
+      redirect('/login');
+    }
+    
+    // For other errors, throw them to be caught by error boundary
+    throw error;
   }
 }

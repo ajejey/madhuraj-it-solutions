@@ -4,29 +4,39 @@ import { cookies } from 'next/headers';
 import { jwtVerify } from 'jose';
 
 export async function getJwtSecretKey() {
- console.log("process.env.JWT_SECRET in getJwtSecretKey", process.env.JWT_SECRET);
-  // return new TextEncoder().encode(process.env.JWT_SECRET);
-  return new TextEncoder().encode("madhurajsystemssolutions_secret_key");
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    console.error("JWT_SECRET is not defined in environment variables");
+    throw new Error("JWT_SECRET is not configured");
+  }
+  console.log("JWT_SECRET is configured:", !!secret);
+  return new TextEncoder().encode(secret);
 }
 
 export async function verifyAuth() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get('auth-token');
-  console.log("token in verify auth", token);
-
-
-  if (!token) {
-    return null;
-  }
-
   try {
-    const verified = await jwtVerify(
-      token.value,
-      await getJwtSecretKey()
-    );
-    console.log("verified in verify auth", verified);
-    return verified.payload;
+    const cookieStore = await cookies();
+    const token = cookieStore.get('auth-token');
+    console.log("Attempting to verify auth token:", !!token);
+
+    if (!token) {
+      console.log("No auth token found in cookies");
+      return null;
+    }
+
+    try {
+      const { payload } = await jwtVerify(
+        token.value,
+        await getJwtSecretKey()
+      );
+      console.log("Token verified successfully, payload:", payload);
+      return payload;
+    } catch (err) {
+      console.error("Token verification failed:", err.message);
+      return null;
+    }
   } catch (err) {
+    console.error("Error in verifyAuth:", err);
     return null;
   }
 }

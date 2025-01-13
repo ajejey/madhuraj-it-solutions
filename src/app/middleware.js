@@ -4,23 +4,49 @@ import { verifyAuth } from './lib/auth';
 const publicPaths = ['/', '/auth/login', '/about', '/services', '/contact'];
 
 export async function middleware(request) {
-  const path = request.nextUrl.pathname;
+  try {
+    console.log("Middleware executing for path:", request.nextUrl.pathname);
+    
+    const path = request.nextUrl.pathname;
+    
+    // Public paths that don't require auth
+    if (path.startsWith('/_next') || 
+        path.startsWith('/api') || 
+        path.startsWith('/static') ||
+        path === '/login' ||
+        path === '/favicon.ico') {
+      console.log("Public path, skipping auth check");
+      return NextResponse.next();
+    }
 
-  // Allow public paths
-  if (publicPaths.includes(path)) {
+    const user = await verifyAuth();
+    console.log("Middleware auth check result:", { 
+      path,
+      authenticated: !!user,
+      userRole: user?.role 
+    });
+
+    // Redirect to login if not authenticated
+    if (!user && !path.startsWith('/auth')) {
+      console.log("No auth, redirecting to login");
+      return NextResponse.redirect(new URL('/login', request.url));
+    }
+
+    // Allow access to admin only for admin users
+    if (path.startsWith('/admin') && user?.role !== 'admin') {
+      console.log("Non-admin attempting to access admin area");
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+
     return NextResponse.next();
+  } catch (error) {
+    console.error("Middleware error:", {
+      message: error.message,
+      stack: error.stack
+    });
+    // On error, redirect to login
+    return NextResponse.redirect(new URL('/login', request.url));
   }
-
-  const user = await verifyAuth();
-
-  console.log("user in middleware", user);
-  
-  // Redirect to login if not authenticated
-  if (!user && !path.startsWith('/auth')) {
-    return NextResponse.redirect(new URL('/auth/login', request.url));
-  }
-
-  return NextResponse.next();
 }
 
 export const config = {
