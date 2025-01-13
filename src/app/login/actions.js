@@ -18,7 +18,7 @@ export async function verifyLoginOTP(email, otp) {
     if (result.success) {
       return {
         success: true,
-        redirectTo: result.isNewUser ? '/admin' : '/'
+        redirectTo: result.isNewUser ? '/' : '/admin'
       };
     }
 
