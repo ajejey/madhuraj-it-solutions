@@ -5,7 +5,8 @@ import { jwtVerify } from 'jose';
 
 export async function getJwtSecretKey() {
  console.log("process.env.JWT_SECRET in getJwtSecretKey", process.env.JWT_SECRET);
-  return new TextEncoder().encode(process.env.JWT_SECRET);
+  // return new TextEncoder().encode(process.env.JWT_SECRET);
+  return new TextEncoder().encode("madhurajsystemssolutions_secret_key");
 }
 
 export async function verifyAuth() {
