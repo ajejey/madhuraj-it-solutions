@@ -46,10 +46,10 @@ const WhyChooseUs = () => {
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 mb-6">
                 <feature.icon className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="font-playfair text-xl font-bold mb-2">
+              <h3 className="font-montserrat text-xl font-bold mb-2">
                 {feature.name}
               </h3>
-              <p className="text-slate/80">
+              <p className="text-slate/80 font-roboto">
                 {feature.description}
               </p>
             </Card>

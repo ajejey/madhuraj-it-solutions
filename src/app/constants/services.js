@@ -1,39 +1,7 @@
 export const services = [
   {
-    id: 'cctv',
-    title: 'CCTV Surveillance & Security Systems',
-    shortDescription: 'Professional CCTV installation and security solutions for homes and businesses',
-    description: `We provide end-to-end CCTV surveillance solutions tailored to your security needs. Our expert team handles everything from consultation to installation and maintenance.`,
-    features: [
-      'HD & 4K Camera Options',
-      'Night Vision Capabilities',
-      'Remote Monitoring',
-      'Mobile App Access',
-      'Motion Detection',
-      'Cloud Storage Options'
-    ],
-    image: '/images/services/cctv-surveillance.jpg',
-    icon: 'Camera',
-  },
-  {
-    id: 'smart-home',
-    title: 'Smart Home Automation',
-    shortDescription: 'Transform your home with cutting-edge automation solutions',
-    description: `Experience the future of home living with our smart automation systems. Control lighting, security, and appliances from your smartphone.`,
-    features: [
-      'Voice Control Integration',
-      'Smart Lighting Systems',
-      'Automated Security',
-      'Climate Control',
-      'Smart Door Locks',
-      'Energy Management'
-    ],
-    image: '/images/services/smart-home.jpg',
-    icon: 'Home',
-  },
-  {
     id: 'computer-sales',
-    title: 'Used Laptops & Desktops Sales',
+    title: 'Laptops & Desktops Sales and Services',
     shortDescription: 'Quality refurbished computers at affordable prices',
     description: `Get reliable, professionally refurbished computers with warranty. We offer a wide range of laptops and desktops suitable for every budget.`,
     features: [
@@ -64,6 +32,23 @@ export const services = [
     icon: 'Tool',
   },
   {
+    id: 'web-development',
+    title: 'Web Development Services',
+    shortDescription: 'Custom website design and development solutions',
+    description: `Create a powerful online presence with our professional web development services. We offer custom designs, responsive layouts, and robust functionality to meet your business needs.`,
+    features: [
+      'Custom Website Design',
+      'Responsive Development',
+      'E-commerce Solutions',
+      'CMS Integration',
+      'SEO Optimization',
+      'Ongoing Maintenance'
+    ],
+    image: '/images/services/web-development.jpg',
+    icon: 'Globe',
+  },
+
+  {
     id: 'network-solutions',
     title: 'Networking Solutions',
     shortDescription: 'Complete networking solutions for businesses',
@@ -78,6 +63,38 @@ export const services = [
     ],
     image: '/images/services/networking.jpg',
     icon: 'Network',
+  },
+  {
+    id: 'cctv',
+    title: 'CCTV Surveillance & Security Systems',
+    shortDescription: 'Professional CCTV installation and security solutions for homes and businesses',
+    description: `We provide end-to-end CCTV surveillance solutions tailored to your security needs. Our expert team handles everything from consultation to installation and maintenance.`,
+    features: [
+      'HD & 4K Camera Options',
+      'Night Vision Capabilities',
+      'Remote Monitoring',
+      'Mobile App Access',
+      'Motion Detection',
+      'Cloud Storage Options'
+    ],
+    image: '/images/services/cctv-surveillance.jpg',
+    icon: 'Camera',
+  },
+  {
+    id: 'smart-home',
+    title: 'Smart Home Automation',
+    shortDescription: 'Transform your home with cutting-edge automation solutions',
+    description: `Experience the future of home living with our smart automation systems. Control lighting, security, and appliances from your smartphone.`,
+    features: [
+      'Voice Control Integration',
+      'Smart Lighting Systems',
+      'Automated Security',
+      'Climate Control',
+      'Smart Door Locks',
+      'Energy Management'
+    ],
+    image: '/images/services/smart-home.jpg',
+    icon: 'Home',
   },
   {
     id: 'printer-services',

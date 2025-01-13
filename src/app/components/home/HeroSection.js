@@ -16,10 +16,11 @@ const HeroSection = () => {
             Tech Services 
               <span className="block text-secondary">for Homes and Offices</span> 
               <span className="block text-tertiary">In Bengaluru</span> 
+            <span className="block text-secondary"> At your doorstep </span>
             </h1>
             <p className="text-lg text-slate-600 max-w-xl">
               Comprehensive IT solutions tailored to your unique business needs. 
-              From computer repairs to advanced security systems, we&apos;ve got you covered.
+              From computer repairs to advanced security systems, we&apos;ve got you covered right at your doorstep.
             </p>
             <div className="flex space-x-4">
               <Button 

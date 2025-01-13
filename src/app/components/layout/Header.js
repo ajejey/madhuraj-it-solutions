@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
+import { CartIcon } from '@/components/CartIcon';
 import { mainNavigation } from '@/app/constants/navigation';
 
 const Header = () => {
@@ -49,6 +50,7 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
+            <CartIcon />
           </nav>
 
           {/* Mobile Menu Button */}
@@ -85,6 +87,9 @@ const Header = () => {
                     {item.name}
                   </Link>
                 ))}
+                <div className="py-2">
+                  <CartIcon />
+                </div>
               </div>
             </nav>
           </div>

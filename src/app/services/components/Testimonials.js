@@ -58,20 +58,20 @@ const TestimonialCard = ({ testimonial }) => (
           ))}
         </div>
       </div>
-      <p className="text-slate/70 font-montserrat mb-6 flex-grow">
+      <p className="text-slate/70 font-roboto mb-6 flex-grow">
         {testimonial.content}
       </p>
       <div className="flex items-center gap-4">
         <div className="flex-shrink-0">
           <div className="w-12 h-12 rounded-full bg-cool flex items-center justify-center">
-            <span className="text-xl font-playfair text-primary">
+            <span className="text-xl font-roboto text-primary">
               {testimonial.author[0]}
             </span>
           </div>
         </div>
         <div>
-          <h4 className="font-playfair text-primary">{testimonial.author}</h4>
-          <p className="text-sm text-slate/60 font-montserrat">{testimonial.title}</p>
+          <h4 className="font-montserrat text-primary">{testimonial.author}</h4>
+          <p className="text-sm text-slate/60 font-roboto">{testimonial.title}</p>
         </div>
       </div>
     </div>

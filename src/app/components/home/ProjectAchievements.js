@@ -91,10 +91,10 @@ const ProjectAchievements = () => {
                       />
                     )}
                   </p>
-                  <h3 className="text-lg font-semibold text-slate-800 mb-2">
+                  <h3 className="text-lg font-semibold font-montserrat text-slate-800 mb-2">
                     {achievement.label}
                   </h3>
-                  <p className="text-slate-600 text-sm">
+                  <p className="text-slate-600 font-roboto text-sm">
                     {achievement.description}
                   </p>
                 </div>

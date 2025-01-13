@@ -1,128 +1,142 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { ShoppingCart, Heart } from 'lucide-react';
-
-const products = [
-  {
-    id: 1,
-    name: 'Intel Core i7 12700K',
-    category: 'Processors',
-    brand: 'Intel',
-    price: 35999,
-    image: '/images/products/intel-i7.webp',
-    description: 'High-performance desktop processor with 12 cores and 20 threads'
-  },
-  {
-    id: 2,
-    name: 'NVIDIA GeForce RTX 3070',
-    category: 'Graphics Cards',
-    brand: 'NVIDIA',
-    price: 45999,
-    image: '/images/products/rtx-3070.jpg',
-    description: 'Powerful graphics card for gaming and professional graphics work'
-  },
-  {
-    id: 3,
-    name: 'Samsung 970 EVO Plus 1TB SSD',
-    category: 'Storage',
-    brand: 'Samsung',
-    price: 12999,
-    image: '/images/products/samsung-ssd.jpg',
-    description: 'High-speed NVMe M.2 SSD with excellent read/write performance'
-  },
-  {
-    id: 4,
-    name: 'Corsair Vengeance 32GB DDR4',
-    category: 'RAM',
-    brand: 'Corsair',
-    price: 8999,
-    image: '/images/products/corsair-ram.jpg',
-    description: '32GB (2x16GB) DDR4 3600MHz high-performance memory kit'
-  },
-  {
-    id: 5,
-    name: 'ASUS ROG Strix Z690-E Gaming',
-    category: 'Motherboards',
-    brand: 'ASUS',
-    price: 29999,
-    image: '/images/products/asus-motherboard.jpg',
-    description: 'High-end gaming motherboard with robust power delivery'
-  },
-  {
-    id: 6,
-    name: 'Seasonic PRIME TX-1000',
-    category: 'Power Supplies',
-    brand: 'Seasonic',
-    price: 19999,
-    image: '/images/products/seasonic-psu.jpg',
-    description: '1000W 80 Plus Titanium certified power supply'
-  }
-];
+import Link from 'next/link';
+import { fetchProducts } from '../actions';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { AddToCartButton } from '@/components/AddToCartButton';
 
 export default function ProductsGrid() {
-  const [favorites, setFavorites] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const toggleFavorite = (productId) => {
-    setFavorites(prev => 
-      prev.includes(productId) 
-        ? prev.filter(id => id !== productId)
-        : [...prev, productId]
-    );
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        setLoading(true);
+        const { products, totalPages } = await fetchProducts({ page });
+        setProducts(products);
+        setTotalPages(totalPages);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadProducts();
+  }, [page]);
+
+  const handleNextPage = () => {
+    if (page < totalPages) {
+      setPage(prev => prev + 1);
+    }
   };
 
+  const handlePrevPage = () => {
+    if (page > 1) {
+      setPage(prev => prev - 1);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-red-500 text-center">
+        Error loading products: {error}
+      </div>
+    );
+  }
+
+  
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {products.map((product) => (
-        <div 
-          key={product.id} 
-          className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-md hover:shadow-lg transition-all group"
+    <div>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {products.map((product) => (
+          <div key={product.id} className="group">
+            <div className="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+            <Link 
+            key={product.id} 
+            href={`/products/${product.id}`} 
+            className="group"
+          >
+              <div className="relative w-full aspect-square">
+                <Image 
+                  src={product.images[0] || '/placeholder-image.png'}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                  className="object-cover group-hover:scale-105 transition-transform"
+                />
+                {product.condition === 'refurbished' && (
+                  <div className="absolute top-2 right-2 bg-yellow-500 text-white px-2 py-1 rounded-full text-xs">
+                    Refurbished
+                  </div>
+                )}
+              </div>
+              <div className="p-4">
+                <h3 className="font-bold text-lg truncate">{product.name}</h3>
+                <div className="flex items-center justify-between mt-2">
+                  <div>
+                    <p className="text-primary font-semibold">
+                      ₹{product.price.toLocaleString()}
+                    </p>
+                    {product.originalPrice && (
+                      <p className="text-gray-500 line-through text-sm">
+                        ₹{product.originalPrice.toLocaleString()}
+                      </p>
+                    )}
+                  </div>
+                  {product.stock === 0 && (
+                    <span className="text-red-500 text-xs">Out of Stock</span>
+                  )}
+                </div>
+                </div>
+              </Link>
+                {product.stock > 0 && (
+                  <div className="mt-2">
+                    <AddToCartButton 
+                      product={product}
+                      disabled={product.stock === 0}
+                      className="w-full"
+                    />
+                  </div>
+                )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-center items-center space-x-4 mt-8">
+        <button 
+          onClick={handlePrevPage} 
+          disabled={page === 1}
+          className="bg-primary text-white p-2 rounded-full disabled:opacity-50"
         >
-          <div className="relative h-48 w-full">
-            <Image 
-              src={product.image} 
-              alt={product.name} 
-              fill
-              priority
-              quality={75}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="object-contain group-hover:scale-105 transition-transform"
-              onError={(e) => {
-                console.error('Image load error:', product.image);
-                e.target.style.display = 'none';
-              }}
-            />
-            <button 
-              onClick={() => toggleFavorite(product.id)}
-              className="absolute top-4 right-4 bg-white/80 p-2 rounded-full hover:bg-white"
-            >
-              <Heart 
-                className={`w-5 h-5 ${
-                  favorites.includes(product.id) 
-                    ? 'text-red-500 fill-current' 
-                    : 'text-slate-600'
-                }`} 
-              />
-            </button>
-          </div>
-          
-          <div className="p-4">
-            <div className="flex flex-col justify-between items-start gap-3 mb-2">
-              <h3 className="text-lg font-semibold text-primary">{product.name}</h3>
-              <span className="text-slate-600 font-medium">₹{product.price.toLocaleString()}</span>
-            </div>
-            <p className="text-slate-500 text-sm mb-4">{product.description}</p>
-            
-            <div className="flex space-x-2">
-              <button className="flex-grow bg-primary text-white py-2 rounded-full hover:bg-primary-dark transition flex items-center justify-center">
-                <ShoppingCart className="w-5 h-5 mr-2" />
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        </div>
-      ))}
+          <ChevronLeft />
+        </button>
+        <span>Page {page} of {totalPages}</span>
+        <button 
+          onClick={handleNextPage} 
+          disabled={page === totalPages}
+          className="bg-primary text-white p-2 rounded-full disabled:opacity-50"
+        >
+          <ChevronRight />
+        </button>
+      </div>
     </div>
   );
 }

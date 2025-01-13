@@ -44,6 +44,7 @@ module.exports = {
       fontFamily: {
         montserrat: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
         playfair: ['var(--font-playfair)', 'Georgia', 'serif'],
+        roboto: ['var(--font-roboto)', 'system-ui', 'sans-serif'],
       },
       container: {
         center: true,

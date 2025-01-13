@@ -1,14 +1,17 @@
+ "use server"
 // Authentication utilities
 import { cookies } from 'next/headers';
 import { jwtVerify } from 'jose';
 
 export async function getJwtSecretKey() {
-  return new TextEncoder().encode(process.env.JWT_SECRET_KEY);
+ 
+  return new TextEncoder().encode(process.env.JWT_SECRET);
 }
 
 export async function verifyAuth() {
-  const cookieStore = cookies();
-  const token = cookieStore.get('token');
+  const cookieStore = await cookies();
+  const token = cookieStore.get('auth-token');
+
 
   if (!token) {
     return null;

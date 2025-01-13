@@ -38,7 +38,7 @@ const ServiceHighlight = () => {
                       )}
                     </div>
                   </div>
-                  <h3 className="font-playfair text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="font-montserrat text-xl font-bold mb-2 group-hover:text-primary transition-colors">
                     {service.title}
                   </h3>
                   <p className="text-slate/80 mb-4 flex-grow">
