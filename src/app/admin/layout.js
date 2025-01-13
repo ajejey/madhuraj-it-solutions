@@ -43,7 +43,7 @@ const SIDEBAR_ITEMS = [
 export default async function AdminLayout({ children }) {
   try {
     // Uncomment when authentication is ready
-    // await requireRole(['admin']);
+    await requireRole(['admin']);
 
     return (
       <div className="flex min-h-screen bg-gray-50">
@@ -84,6 +84,7 @@ export default async function AdminLayout({ children }) {
       </div>
     );
   } catch (error) {
+    console.error("error in admin layout", error);
     redirect('/login');
   }
 }

@@ -12,6 +12,8 @@ export async function middleware(request) {
   }
 
   const user = await verifyAuth();
+
+  console.log("user in middleware", user);
   
   // Redirect to login if not authenticated
   if (!user && !path.startsWith('/auth')) {
