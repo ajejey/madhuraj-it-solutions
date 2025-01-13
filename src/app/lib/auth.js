@@ -1,4 +1,4 @@
- "use server"
+ 'use server';
 // Authentication utilities
 import { cookies } from 'next/headers';
 import { jwtVerify } from 'jose';
