@@ -3,6 +3,8 @@ import { requireAuth } from '@/app/lib/auth';
 import OrdersList from './components/OrdersList';
 import OrdersListSkeleton from './components/OrdersListSkeleton';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Your Orders | Madhuraj System Solutions',
   description: 'View and track your orders from Madhuraj System Solutions',
