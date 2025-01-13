@@ -40,6 +40,8 @@ const SIDEBAR_ITEMS = [
   }
 ];
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminLayout({ children }) {
   try {
     console.log("Entering admin layout");
