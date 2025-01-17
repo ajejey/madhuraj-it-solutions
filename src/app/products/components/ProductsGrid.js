@@ -88,10 +88,10 @@ export default function ProductsGrid({ initialProducts, currentPage }) {
       {/* Products Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {products.map((product) => (
-          <div key={product._id} className="group">
+          <div key={product.id} className="group">
             <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
               <Link 
-                href={`/products/${product._id}`}
+                href={`/products/${product.id}`}
                 className="block"
               >
                 <div className="aspect-square relative">
