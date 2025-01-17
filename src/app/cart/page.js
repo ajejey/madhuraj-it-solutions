@@ -10,7 +10,7 @@ export default function CartPage() {
   const { cart } = useCart();
   const hasItems = cart.items.length > 0;
 
-  console.log("cart", cart);
+  // console.log("cart", cart);
 
   if (!hasItems) {
     return (

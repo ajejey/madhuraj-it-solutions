@@ -33,11 +33,11 @@ const SIDEBAR_ITEMS = [
     icon: Users, 
     label: 'Users' 
   },
-  { 
-    href: '/admin/settings', 
-    icon: Settings, 
-    label: 'Settings' 
-  }
+  // { 
+  //   href: '/admin/settings', 
+  //   icon: Settings, 
+  //   label: 'Settings' 
+  // }
 ];
 
 export const dynamic = 'force-dynamic';
