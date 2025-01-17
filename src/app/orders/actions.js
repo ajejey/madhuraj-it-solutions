@@ -59,3 +59,44 @@ export async function getOrders() {
     throw new Error('Failed to load orders. Please try again.');
   }
 }
+
+export async function getOrderDetails(orderId) {
+  await connectDB();
+  const user = await requireAuth();
+
+  try {
+    const order = await Order.findOne({ 
+      _id: orderId, 
+      user: user.id 
+    })
+    .populate('items.product')
+    .lean();
+
+    if (!order) {
+      throw new Error('Order not found');
+    }
+
+    return {
+      _id: order._id.toString(),
+      items: order.items.map(item => ({
+        product: {
+          _id: item.product._id.toString(),
+          name: item.product.name,
+          images: item.product.images,
+          price: item.product.price
+        },
+        quantity: item.quantity,
+        price: item.price
+      })),
+      totalAmount: order.totalAmount,
+      shippingAddress: order.shippingAddress,
+      paymentInfo: order.paymentInfo,
+      orderStatus: order.orderStatus,
+      createdAt: order.createdAt.toISOString(),
+      updatedAt: order.updatedAt.toISOString()
+    };
+  } catch (error) {
+    console.error('Failed to fetch order details:', error);
+    throw new Error('Failed to load order details. Please try again.');
+  }
+}

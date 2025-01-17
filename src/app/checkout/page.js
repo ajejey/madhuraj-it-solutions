@@ -30,8 +30,8 @@ export default function CheckoutPage() {
   }, []);
 
   useEffect(() => {
-    // Redirect to cart if cart is empty
-    if (!isLoading && cart.items.length === 0) {
+    // Redirect to cart if cart is empty and not in the process of completing an order
+    if (!isLoading && cart.items.length === 0 && !sessionStorage.getItem('orderInProgress')) {
       router.replace('/cart');
     }
   }, [cart.items.length, isLoading, router]);

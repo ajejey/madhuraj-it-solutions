@@ -149,8 +149,7 @@ const generateCustomerOrderConfirmationHTML = async (order) => {
           <div class="order-items">
             <h3>Items Purchased</h3>
             ${populatedItems.map(item => `
-              <div class="order-item">
-                <img src="${item.productImage}" alt="${item.productName}">
+              <div class="order-item">                
                 <div class="order-item-details">
                   <h4>${item.productName}</h4>
                   <p>Quantity: ${item.quantity}</p>
@@ -313,7 +312,6 @@ const generateBusinessOrderNotificationHTML = async (order) => {
             <h3>Ordered Items</h3>
             ${populatedItems.map(item => `
               <div class="order-item">
-                <img src="${item.productImage}" alt="${item.productName}">
                 <div class="order-item-details">
                   <h4>${item.productName}</h4>
                   <p>Quantity: ${item.quantity}</p>

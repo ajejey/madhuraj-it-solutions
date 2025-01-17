@@ -37,56 +37,7 @@ export default function Home() {
         <ContactCTA />
       </div>
 
-      {/* Our Partners Section */}
-      {/* <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-              Our Trusted Partners
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              We collaborate with leading technology brands to deliver the best solutions for our customers.
-            </p>
-          </div> */}
-
-          {/* Infinite Scroll Partners */}
-          {/* <div className="relative w-full overflow-hidden">
-            <div className="animate-infinite-scroll-left flex items-center"> */}
-              {/* First Row */}
-              {/* {PARTNERS.map((partner, index) => (
-                <div 
-                  key={index} 
-                  className="flex-shrink-0 mx-8 opacity-70 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
-                >
-                  <Image 
-                    src={partner.logo} 
-                    alt={`${partner.name} Logo`} 
-                    width={120} 
-                    height={60} 
-                    className="object-contain"
-                  />
-                </div>
-              ))} */}
-              
-              {/* Duplicate Row for Infinite Scroll Effect */}
-              {/* {PARTNERS.map((partner, index) => (
-                <div 
-                  key={`duplicate-${index}`} 
-                  className="flex-shrink-0 mx-8 opacity-70 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
-                >
-                  <Image 
-                    src={partner.logo} 
-                    alt={`${partner.name} Logo`} 
-                    width={120} 
-                    height={60} 
-                    className="object-contain"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section> */}
+   
       <Footer />
     </main>
   );

@@ -27,10 +27,14 @@ export function CheckoutForm() {
     setLoadingMessage('Preparing your order...');
     
     try {
+      // Set order in progress flag
+      sessionStorage.setItem('orderInProgress', 'true');
+
       // Validate cart
       if (cart.items.length === 0) {
         toast.error('Your cart is empty');
         setIsLoading(false);
+        sessionStorage.removeItem('orderInProgress');
         return;
       }
 
@@ -38,6 +42,7 @@ export function CheckoutForm() {
       if (!razorpayLoaded) {
         toast.error('Razorpay payment gateway is not loaded. Please try again.');
         setIsLoading(false);
+        sessionStorage.removeItem('orderInProgress');
         return;
       }
 
@@ -116,9 +121,13 @@ export function CheckoutForm() {
 
               // Clear cart and show success
               setLoadingMessage('Order completed! Redirecting...');
-              clearCart();
               toast.success('Order placed successfully!');
-              router.push(`/orders/${verificationResult.orderId}`);
+              
+              // Remove order in progress flag
+              sessionStorage.removeItem('orderInProgress');
+              
+              router.push(`/orders/${verificationResult.orderId}?clearCart=true`);
+              // clearCart();
             } else {
               throw new Error(verificationResult.message || 'Payment verification failed');
             }
@@ -126,12 +135,14 @@ export function CheckoutForm() {
             console.error('Payment verification error:', verifyError);
             toast.error('Payment verification failed. Please contact support.');
             setIsLoading(false);
+            sessionStorage.removeItem('orderInProgress');
           }
         },
         modal: {
           ondismiss: () => {
             setIsLoading(false);
             setLoadingMessage('');
+            sessionStorage.removeItem('orderInProgress');
           }
         },
         theme: {
@@ -147,6 +158,7 @@ export function CheckoutForm() {
       toast.error('Failed to process your order. Please try again.');
       setIsLoading(false);
       setLoadingMessage('');
+      sessionStorage.removeItem('orderInProgress');
     }
   };
 

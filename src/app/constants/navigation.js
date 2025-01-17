@@ -19,6 +19,14 @@ export const mainNavigation = [
     name: 'Contact',
     href: '/contact',
   },
+  {
+    name: 'Orders',
+    href: '/orders',
+  },
+  {
+    name: 'Login',
+    href: '/login',
+  }
 ];
 
 export const footerNavigation = {

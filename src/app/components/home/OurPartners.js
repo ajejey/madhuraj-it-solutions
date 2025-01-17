@@ -28,12 +28,12 @@ const OurPartners = () => {
 
           {/* Infinite Scroll Partners */}
           <div className="relative w-full overflow-hidden">
-            <div className="animate-infinite-scroll-left flex items-center">
+            <div className="flex items-center animate-infinite-scroll-left-mobile md:animate-infinite-scroll-left">
               {/* First Row */}
               {PARTNERS.map((partner, index) => (
                 <div 
                   key={index} 
-                  className="flex-shrink-0 mx-8 opacity-70 hover:opacity-100 transition-opacity duration-300 "
+                  className="flex-shrink-0 mx-8  hover:opacity-100 transition-opacity duration-300 "
                 >
                   <Image 
                     src={partner.logo} 
@@ -44,12 +44,12 @@ const OurPartners = () => {
                   />
                 </div>
               ))}
-              
+　
               {/* Duplicate Row for Infinite Scroll Effect */}
               {PARTNERS.map((partner, index) => (
                 <div 
                   key={`duplicate-${index}`} 
-                  className="flex-shrink-0 mx-8 opacity-70 hover:opacity-100 transition-opacity duration-300 "
+                  className="flex-shrink-0 mx-8  hover:opacity-100 transition-opacity duration-300 "
                 >
                   <Image 
                     src={partner.logo} 
