@@ -58,7 +58,7 @@ export const metadata = {
     telephone: false,
   },
   verification: {
-    google: 'google-site-verification=YOUR_CODE', // Add your Google verification code
+    google: 'KTC9HsGvGyKPhbqIJG8UDgQb5vGpmHQGVj7V75sBNeE', // Add your Google verification code
   },
   openGraph: {
     title: 'Madhuraj System Solutions - Your Trusted IT Partner in Bangalore',
@@ -69,7 +69,7 @@ export const metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-image.jpg', // Add your OG image
+        url: 'https://madhurajsystems.com/opengraph-image.jpg', // Add your OG image
         width: 1200,
         height: 630,
         alt: 'Madhuraj System Solutions - IT Services in Bangalore',
@@ -87,6 +87,19 @@ export const metadata = {
       'max-snippet': -1,
     },
   },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
+    other: [
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        url: '/favicon-32x32.png',
+      },
+    ],
+  },
   alternates: {
     canonical: 'https://madhurajsystems.com',
   },
@@ -95,10 +108,10 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Madhuraj System Solutions - IT Services in Bangalore',
     description: 'Professional IT services, CCTV installation & computer solutions in RR Nagar, Bangalore. Expert team led by Mr. Bharath.',
-    images: ['/twitter-image.jpg'], // Add your Twitter card image
+    images: ['https://madhurajsystems.com/opengraph-image.jpg'], // Add your Twitter card image
   },
   other: {
-    'google-site-verification': 'YOUR_VERIFICATION_CODE', // Add your Google verification code
+    'google-site-verification': 'KTC9HsGvGyKPhbqIJG8UDgQb5vGpmHQGVj7V75sBNeE', // Add your Google verification code
     'msvalidate.01': 'YOUR_VERIFICATION_CODE', // Add your Bing verification code
     'facebook-domain-verification': 'YOUR_VERIFICATION_CODE', // Add your Facebook verification code
     'og:region': 'Karnataka',
@@ -141,8 +154,8 @@ export const metadata = {
         },
         geo: {
           '@type': 'GeoCoordinates',
-          latitude: 12.9279, // Add your exact coordinates
-          longitude: 77.5191
+          latitude: 12.926249, // Add your exact coordinates 12.926249,77.5155563
+          longitude: 77.5155563
         },
         openingHoursSpecification: [
           {
@@ -165,16 +178,14 @@ export const metadata = {
           }
         ],
         sameAs: [
-          'https://www.facebook.com/madhurajsystems', // Add your social media links
-          'https://www.instagram.com/madhurajsystems',
-          'https://www.linkedin.com/company/madhurajsystems'
+          'https://www.facebook.com/bharathraj.compu/', // Add your social media links
         ],
         priceRange: '₹₹',
         servesCuisine: 'IT Services',
         aggregateRating: {
           '@type': 'AggregateRating',
           ratingValue: '4.8',
-          reviewCount: '150'
+          reviewCount: '151'
         }
       })
     }
