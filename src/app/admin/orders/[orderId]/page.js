@@ -17,7 +17,9 @@ export default async function OrderDetailPage({ params }) {
   await requireAuth();
   await requireRole('admin');
 
-  const order = await fetchOrderDetails(params.orderId);
+  const { orderId } = await params;
+
+  const order = await fetchOrderDetails(orderId);
 
   return (
     <Suspense fallback={<OrderDetailSkeleton />}>

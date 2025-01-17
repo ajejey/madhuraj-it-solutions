@@ -20,6 +20,7 @@ import {
   cancelOrder, 
   refundOrder 
 } from '../actions';
+import { getFileUrl } from '@/app/lib/storage';
 
 const STATUS_OPTIONS = [
   'pending', 
@@ -43,6 +44,8 @@ export default function OrderDetailView({ order }) {
   const [currentStatus, setCurrentStatus] = useState(order.orderStatus);
   const [isStatusEditing, setIsStatusEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  console.log('Order:', order);
 
   const handleStatusChange = async (newStatus) => {
     setIsLoading(true);
@@ -231,9 +234,9 @@ export default function OrderDetailView({ order }) {
         {order.items.map((item) => (
           <div key={item.id} className="flex items-center gap-4 mb-4 pb-4 border-b last:border-b-0">
             <div className="relative h-20 w-20 bg-gray-100 rounded-lg">
-              {item.product.image ? (
+              {item.product.images[0] ? (
                 <Image
-                  src={item.product.image}
+                  src={getFileUrl(item.product.images[0])}
                   alt={item.product.name}
                   fill
                   className="object-cover rounded-lg"

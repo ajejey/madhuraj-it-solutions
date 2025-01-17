@@ -169,7 +169,7 @@ export async function fetchOrderDetails(orderId) {
     })
     .populate({
       path: 'items.product',
-      select: 'name image price description'
+      select: 'name images price description'
     })
     .lean();
 
