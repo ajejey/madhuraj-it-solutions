@@ -4,7 +4,6 @@ import { requireAuth, requireRole } from '@/app/lib/auth';
 import { Order } from '@/models/Order';
 import { connectDB } from '@/app/lib/db';
 import { revalidatePath } from 'next/cache';
-import { generateInvoicePDF } from '@/lib/invoice-generator';
 import { sendOrderStatusUpdateEmail } from '@/app/lib/actions/auth';
 // import { sendOrderStatusUpdateEmail } from '@/lib/email-service';
 
@@ -48,32 +47,32 @@ export async function updateOrderStatus(orderId, newStatus) {
   }
 }
 
-export async function generateOrderInvoice(orderId) {
-  await connectDB();
-  await requireAuth();
-  await requireRole('admin');
+// export async function generateOrderInvoice(orderId) {
+//   await connectDB();
+//   await requireAuth();
+//   await requireRole('admin');
 
-  try {
-    const order = await Order.findById(orderId)
-      .populate('user')
-      .populate('items.product');
+//   try {
+//     const order = await Order.findById(orderId)
+//       .populate('user')
+//       .populate('items.product');
 
-    if (!order) {
-      throw new Error('Order not found');
-    }
+//     if (!order) {
+//       throw new Error('Order not found');
+//     }
 
-    // Generate PDF Invoice
-    const invoicePath = await generateInvoicePDF(order);
+//     // Generate PDF Invoice
+//     const invoicePath = await generateInvoicePDF(order);
 
-    return {
-      message: 'Invoice generated successfully',
-      invoicePath
-    };
-  } catch (error) {
-    console.error('Failed to generate invoice:', error);
-    throw new Error('Failed to generate invoice. Please try again.');
-  }
-}
+//     return {
+//       message: 'Invoice generated successfully',
+//       invoicePath
+//     };
+//   } catch (error) {
+//     console.error('Failed to generate invoice:', error);
+//     throw new Error('Failed to generate invoice. Please try again.');
+//   }
+// }
 
 export async function cancelOrder(orderId, reason) {
   await connectDB();

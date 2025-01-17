@@ -7,7 +7,7 @@ import { useCart } from '@/app/lib/contexts/CartContext';
 export function CartIcon() {
   const { cart, isLoading } = useCart();
 
-  console.log("cart", cart);
+  // console.log("cart", cart);
 
 
   return (

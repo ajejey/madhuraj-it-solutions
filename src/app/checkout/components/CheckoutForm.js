@@ -8,6 +8,7 @@ import Script from 'next/script';
 import { useCart } from '@/app/lib/contexts/CartContext';
 import { toast } from 'sonner';
 import { sendOrderConfirmationEmail } from '@/app/lib/actions/email';
+import { createNewOrder, validateAndPrepareItems } from '../actions';
 
 export function CheckoutForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,75 +24,60 @@ export function CheckoutForm() {
   };
 
   const onSubmit = async (formData) => {
-    setIsLoading(true);
-    setLoadingMessage('Preparing your order...');
-    
     try {
-      // Set order in progress flag
-      sessionStorage.setItem('orderInProgress', 'true');
-
-      // Validate cart
-      if (cart.items.length === 0) {
-        toast.error('Your cart is empty');
-        setIsLoading(false);
-        sessionStorage.removeItem('orderInProgress');
-        return;
-      }
-
-      // Check if Razorpay script is loaded
-      if (!razorpayLoaded) {
-        toast.error('Razorpay payment gateway is not loaded. Please try again.');
-        setIsLoading(false);
-        sessionStorage.removeItem('orderInProgress');
-        return;
-      }
-
-      // Prepare order data
-      const orderData = {
-        items: cart.items.map(item => ({
-          product: item.id,
-          quantity: item.quantity,
-          price: item.price,
-          image: item.image
-        })),
-        amount: Math.round(cart.totalAmount * 100), // Convert to paisa
-        shippingDetails: {
-          fullName: formData.fullName,
-          phoneNumber: formData.phoneNumber,
-          addressLine1: formData.addressLine1,
-          addressLine2: formData.addressLine2,
-          city: formData.city,
-          state: formData.state,
-          pincode: formData.pincode
-        }
-      };
-
-      // Create Razorpay order via API
-      setLoadingMessage('Creating order...');
-      const createOrderResponse = await fetch('/api/createOrder', {
+      setIsLoading(true);
+      
+      // Step 1: Validate and prepare items
+      setLoadingMessage('Validating and preparing products...');
+      const validatedItems = await validateAndPrepareItems(cart.items);
+      
+      // Step 2: Create Razorpay order
+      setLoadingMessage('Creating payment order...');
+      const totalAmount = validatedItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+      const razorpayResponse = await fetch('/api/createOrder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(orderData)
+        body: JSON.stringify({ amount: totalAmount })
       });
-
-      const orderDetails = await createOrderResponse.json();
-
-      if (!createOrderResponse.ok) {
-        throw new Error(orderDetails.error || 'Failed to create order');
+      
+      if (!razorpayResponse.ok) {
+        throw new Error('Failed to create Razorpay order');
       }
-
-      // Razorpay payment options
+      
+      const { id: razorpayOrderId } = await razorpayResponse.json();
+      
+      // Step 3: Prepare order data
+      const orderData = {
+        items: validatedItems,
+        shippingAddress: {
+          fullName: formData.fullName,
+          addressLine1: formData.addressLine1,
+          addressLine2: formData.addressLine2,
+          city: formData.city,
+          state: formData.state,
+          pincode: formData.pincode,
+          phoneNumber: formData.phoneNumber
+        },
+        razorpayOrderId
+      };
+      
+      // Step 4: Create order in database
+      setLoadingMessage('Finalizing order...');
+      const orderResponse = await createNewOrder(orderData);
+      
+      // Step 5: Proceed with Razorpay payment
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_TEST_KEY_ID,
-        amount: orderDetails.amount,
-        currency: orderDetails.currency,
+        amount: totalAmount * 100,
+        currency: 'INR',
         name: 'Madhuraj System Solutions',
         description: 'Product Purchase',
-        order_id: orderDetails.id,
+        order_id: razorpayOrderId,
         handler: async function (response) {
           try {
+            setIsLoading(true);
             // Verify payment via API
             setLoadingMessage('Verifying payment...');
             const verifyResponse = await fetch('/api/verifyOrder', {
@@ -100,7 +86,7 @@ export function CheckoutForm() {
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify({
-                orderId: orderDetails.orderId,
+                orderId: orderResponse.id,
                 razorpayOrderId: response.razorpay_order_id,
                 razorpayPaymentId: response.razorpay_payment_id,
                 razorpaySignature: response.razorpay_signature
@@ -138,27 +124,27 @@ export function CheckoutForm() {
             sessionStorage.removeItem('orderInProgress');
           }
         },
-        modal: {
-          ondismiss: () => {
-            setIsLoading(false);
-            setLoadingMessage('');
-            sessionStorage.removeItem('orderInProgress');
-          }
+        prefill: {
+          name: formData.fullName,
+          email: 'user@example.com', // Replace with actual user email
+          contact: formData.phoneNumber
+        },
+        notes: {
+          orderId: orderResponse.id
         },
         theme: {
-          color: '#3498db'
+          color: '#3399cc'
         }
       };
-
-      // Open Razorpay payment dialog
-      const rzp = new window.Razorpay(options);
-      rzp.open();
+      
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+      
     } catch (error) {
-      console.error('Order creation error:', error);
-      toast.error('Failed to process your order. Please try again.');
+      console.error('Order submission error:', error);
+      toast.error(error.message || 'Failed to process order');
+    } finally {
       setIsLoading(false);
-      setLoadingMessage('');
-      sessionStorage.removeItem('orderInProgress');
     }
   };
 

@@ -16,7 +16,6 @@ import {
 import { toast } from 'sonner';
 import { 
   updateOrderStatus, 
-  generateOrderInvoice, 
   cancelOrder, 
   refundOrder 
 } from '../actions';
@@ -61,19 +60,19 @@ export default function OrderDetailView({ order }) {
     }
   };
 
-  const handleGenerateInvoice = async () => {
-    setIsLoading(true);
-    try {
-      const result = await generateOrderInvoice(order.id);
-      toast.success('Invoice generated');
-      // Optionally open or download the invoice
-      window.open(result.invoicePath, '_blank');
-    } catch (error) {
-      toast.error(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const handleGenerateInvoice = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const result = await generateOrderInvoice(order.id);
+  //     toast.success('Invoice generated');
+  //     // Optionally open or download the invoice
+  //     window.open(result.invoicePath, '_blank');
+  //   } catch (error) {
+  //     toast.error(error.message);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   const handleCancelOrder = async () => {
     const reason = prompt('Please provide a reason for cancellation:');

@@ -140,3 +140,80 @@ async function calculateOrderTotal(items) {
   
   return total;
 }
+
+export async function validateAndPrepareItems(items) {
+  // Connect to database
+  await connectDB();
+
+  console.log("items in validateAndPrepareItems", items);
+
+  // Validate product availability and prepare items
+  const validatedItems = await Promise.all(items.map(async (item) => {
+    const product = await Product.findById(item.id);
+    
+    if (!product) {
+      throw new Error(`Product ${item.id} not found`);
+    }
+    
+    if (product.stock < item.quantity) {
+      throw new Error(`Insufficient stock for ${product.name}. Available: ${product.stock}, Requested: ${item.quantity}`);
+    }
+
+    console.log("product in validateAndPrepareItems", product);
+    
+    return {
+      product: item.id,
+      quantity: item.quantity,
+      price: product.discountedPrice,
+      name: product.name
+    };
+  }));
+  
+  return validatedItems;
+}
+
+export async function createNewOrder(orderData) {
+  try {
+    // Verify authentication
+    const user = await requireAuth();
+    
+    // Connect to database
+    await connectDB();
+
+    // Create the order with validated data
+    const order = await Order.create({
+      user: user.id,
+      items: orderData.items.map(item => ({
+        product: item.product,
+        quantity: item.quantity,
+        price: item.price
+      })),
+      totalAmount: orderData.items.reduce((total, item) => total + (item.price * item.quantity), 0),
+      shippingAddress: orderData.shippingAddress,
+      paymentInfo: {
+        razorpayOrderId: orderData.razorpayOrderId,
+        status: 'pending'
+      }
+    });
+
+    // Update product stock
+    await Promise.all(orderData.items.map(async (item) => {
+      await Product.findByIdAndUpdate(item.product, {
+        $inc: { stock: -item.quantity }
+      });
+    }));
+
+    // Update user's orders
+    await User.findByIdAndUpdate(user.id, {
+      $push: { orders: order._id }
+    });
+
+    return {
+      id: order._id.toString(),
+      razorpayOrderId: orderData.razorpayOrderId
+    };
+  } catch (error) {
+    console.error('Order creation failed:', error);
+    throw new Error(error.message || 'Failed to create order. Please try again.');
+  }
+}
