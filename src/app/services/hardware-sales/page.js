@@ -62,14 +62,14 @@ export default function HardwareSalesPage() {
           
           <div className="flex space-x-4">
             <Link 
-              href="/services/hardware-sales/inventory"
+              href="/products"
               className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition"
             >
               View Inventory
             </Link>
             <Link 
               href="/contact"
-              className="border border-primary text-primary px-6 py-2 rounded-full hover:bg-primary-light transition"
+              className="border border-primary text-primary px-6 py-2 rounded-full hover:text-white hover:bg-primary-light transition"
             >
               Custom Configurations
             </Link>
@@ -184,7 +184,7 @@ export default function HardwareSalesPage() {
                 <Package className="w-8 h-8" /> Custom Configurations
               </h3>
               <p className="text-gray-700 mb-4">
-                Need a specialized hardware setup? Our expert team provides tailored hardware configurations. Whether you're building a high-performance gaming rig, a professional workstation, or a compact system, we design solutions that precisely match your requirements.
+                Need a specialized hardware setup? Our expert team provides tailored hardware configurations. Whether you&apos;re building a high-performance gaming rig, a professional workstation, or a compact system, we design solutions that precisely match your requirements.
               </p>
               <ul className="space-y-2 text-slate-600">
                 <li className="flex items-center gap-2">
@@ -208,7 +208,7 @@ export default function HardwareSalesPage() {
       {/* Delivery and Support */}
       <section className="bg-cool/10 p-12 rounded-2xl">
         <div className="flex flex-col md:flex-row items-center gap-8">
-          <div className="md:w-1/2">
+          <div>
             <h2 className="text-2xl font-bold mb-4 text-primary flex items-center gap-3">
               <ShieldCheck className="w-10 h-10" /> Comprehensive Support
             </h2>
@@ -236,7 +236,7 @@ export default function HardwareSalesPage() {
               Contact Support
             </Link>
           </div>
-          <div className="md:w-1/2 hidden md:block">
+          {/* <div className="md:w-1/2 hidden md:block">
             <Image 
               src="/images/services/hardware-support.jpg" 
               alt="Hardware Support" 
@@ -244,7 +244,7 @@ export default function HardwareSalesPage() {
               height={400} 
               className="rounded-2xl shadow-lg"
             />
-          </div>
+          </div> */}
         </div>
       </section>
     </div>

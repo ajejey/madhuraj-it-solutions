@@ -1,14 +1,16 @@
 import Link from 'next/link';
-import { Camera, HardDrive, Home, Laptop, Network, Printer } from 'lucide-react';
+import { Camera, HardDrive, Home, Laptop, CodeXml, Network, Printer, Cpu } from 'lucide-react';
 import { services } from '@/app/constants/services';
 
 const iconMap = {
   Camera,
   Home,
   Laptop,
-  Tool: HardDrive,
+  Tool: Cpu,
+  CodeXml,
+  Printer,
   Network,
-  Printer
+  Cpu
 };
 
 const ServiceCard = ({ service }) => {

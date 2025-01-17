@@ -9,8 +9,10 @@ export const metadata = {
 
 export default async function EditProductPage({ params }) {
   await requireRole(['admin']);
-  
-  const product = await fetchProductById(params.id);
+  const { id } = await params;
+  const product = await fetchProductById(id);
+
+  console.log("product in EditProductPage after fetch ", product);
 
   return (
     <div className="space-y-6 pt-6">

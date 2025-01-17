@@ -10,11 +10,14 @@ export function AddToCartButton({
   className = ''
 }) {
   const { addToCart, removeFromCart, updateQuantity, isLoading, cart } = useCart();
+
+  console.log("product in AddToCartButton", product);
   
   // Check if product is already in cart
   const cartItem = cart.items.find(item => item.id === product.id);
   const currentQuantity = cartItem?.quantity || 0;
   const isInCart = currentQuantity > 0;
+
 
   const handleInitialAdd = () => {
     addToCart({

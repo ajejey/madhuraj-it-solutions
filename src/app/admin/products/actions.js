@@ -119,6 +119,9 @@ export async function updateProduct(productId, productData) {
   await connectDB();
   await requireRole(['admin']);
 
+  console.log("productId in updateProduct", productId);
+  console.log("productData in updateProduct", productData);
+
   try {
     // Handle image uploads
     const uploadedImages = [];
@@ -132,6 +135,8 @@ export async function updateProduct(productId, productData) {
         }
       }
     }
+
+    
 
     // Update product data
     const updatedProduct = await Product.findByIdAndUpdate(

@@ -6,10 +6,10 @@ import { jwtVerify } from 'jose';
 export async function getJwtSecretKey() {
   const secret = process.env.JWT_SECRET;
   if (!secret) {
-    console.error("JWT_SECRET is not defined in environment variables");
+    // console.error("JWT_SECRET is not defined in environment variables");
     throw new Error("JWT_SECRET is not configured");
   }
-  console.log("JWT_SECRET is configured:", !!secret);
+  // console.log("JWT_SECRET is configured:", !!secret);
   return new TextEncoder().encode(secret);
 }
 
@@ -17,7 +17,7 @@ export async function verifyAuth() {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get('auth-token');
-    console.log("Attempting to verify auth token:", !!token);
+    // console.log("Attempting to verify auth token:", !!token);
 
     if (!token) {
       console.log("No auth token found in cookies");
@@ -29,10 +29,10 @@ export async function verifyAuth() {
         token.value,
         await getJwtSecretKey()
       );
-      console.log("Token verified successfully, payload:", payload);
+      // console.log("Token verified successfully, payload:", payload);
       return payload;
     } catch (err) {
-      console.error("Token verification failed:", err.message);
+      // console.error("Token verification failed:", err.message);
       return null;
     }
   } catch (err) {
@@ -43,7 +43,6 @@ export async function verifyAuth() {
 
 export async function requireAuth() {
   const user = await verifyAuth();
-  console.log("user in require auth", user);
   if (!user) {
     throw new Error('Authentication required');
   }
@@ -51,10 +50,7 @@ export async function requireAuth() {
 }
 
 export async function requireRole(allowedRoles) {
-  console.log("allowedRoles in require role", allowedRoles);
   const user = await requireAuth();
-  console.log("user in require role", user);
-  console.log("user role in require role", user.role);
   if (!allowedRoles.includes(user.role)) {
     throw new Error('Unauthorized');
   }

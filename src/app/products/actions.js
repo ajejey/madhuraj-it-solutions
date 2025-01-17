@@ -10,6 +10,7 @@ export async function fetchProducts({
   category, 
   condition, 
   search,
+  brand,
   minPrice,
   maxPrice,
   sortBy = 'createdAt',
@@ -21,6 +22,9 @@ export async function fetchProducts({
 
   // Category filter
   if (category) query.category = category;
+
+  // Brand filter
+  if (brand) query.brand = brand;
 
   // Condition filter
   if (condition) query.condition = condition;
@@ -48,33 +52,40 @@ export async function fetchProducts({
   // Pagination
   const skip = (page - 1) * limit;
 
-  // Fetch products
-  const products = await Product.find(query)
-    .sort(sortOptions)
-    .skip(skip)
-    .limit(limit)
-    .select('name price originalPrice condition images brand stock');
+  try {
+    // Fetch products with pagination
+    const [products, total] = await Promise.all([
+      Product.find(query)
+        .sort(sortOptions)
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+      Product.countDocuments(query)
+    ]);
 
-  // Total products count for pagination
-  const totalProducts = await Product.countDocuments(query);
+    // Get total pages
+    const totalPages = Math.ceil(total / limit);
 
-  // Process products to include full image URLs
-  const processedProducts = products.map(product => {
-    const productObject = product.toObject();
+    // Process products to include full image URLs
+    const processedProducts = products.map(product => {
+      return {
+        ...product,
+        id: product._id.toString(),
+        _id: undefined,
+        images: product.images.map(getFileUrl)
+      };
+    });
+
     return {
-      ...productObject,
-      id: productObject._id.toString(),
-      _id: undefined,
-      images: productObject.images.map(getFileUrl)
+      products: processedProducts,
+      currentPage: page,
+      totalPages,
+      total
     };
-  });
-
-  return {
-    products: processedProducts,
-    totalPages: Math.ceil(totalProducts / limit),
-    currentPage: page,
-    totalProducts
-  };
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw error;
+  }
 }
 
 export async function fetchProductById(productId) {
@@ -99,5 +110,12 @@ export async function getProductCategories() {
   await connectDB();
 
   const categories = await Product.distinct('category');
-  return categories.toObject();
+  // console.log("categories", categories);
+  return categories;
+}
+
+export async function getProductBrands() {
+  await connectDB();
+  const brands = await Product.distinct('brand');
+  return brands;
 }

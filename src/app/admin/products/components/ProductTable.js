@@ -49,6 +49,8 @@ export default function ProductTable({
     }
   };
 
+  console.log("products in ProductTable", products);
+
   return (
     <div className="bg-white rounded-2xl shadow-md">
       <div className="overflow-x-auto">

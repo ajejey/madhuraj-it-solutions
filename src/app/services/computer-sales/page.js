@@ -64,7 +64,7 @@ export default function ComputerSalesPage() {
           
           <div className="flex space-x-4">
             <Link 
-              href="/services/computer-sales/consultation"
+              href="/products"
               className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition"
             >
               Configure PC
@@ -73,7 +73,7 @@ export default function ComputerSalesPage() {
               href="/contact"
               className="border border-primary text-primary px-6 py-2 rounded-full hover:bg-primary-light transition"
             >
-              Contact Experts
+              Contact Us
             </Link>
           </div>
         </div>
@@ -209,7 +209,7 @@ export default function ComputerSalesPage() {
       {/* Delivery and Support */}
       <section className="bg-cool/10 p-12 rounded-2xl">
         <div className="flex flex-col md:flex-row items-center gap-8">
-          <div className="md:w-1/2">
+          <div>
             <h2 className="text-2xl font-bold mb-4 text-primary flex items-center gap-3">
               <Shield className="w-10 h-10" /> Comprehensive Support
             </h2>
@@ -237,7 +237,7 @@ export default function ComputerSalesPage() {
               Contact Support
             </Link>
           </div>
-          <div className="md:w-1/2 hidden md:block">
+          {/* <div className="md:w-1/2 hidden md:block">
             <Image 
               src="/images/services/computer-sales-support.jpg" 
               alt="Computer Sales Support" 
@@ -245,7 +245,7 @@ export default function ComputerSalesPage() {
               height={400} 
               className="rounded-2xl shadow-lg"
             />
-          </div>
+          </div> */}
         </div>
       </section>
     </div>

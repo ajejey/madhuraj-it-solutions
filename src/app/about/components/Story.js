@@ -10,11 +10,11 @@ const Story = () => {
                 <p className="text-slate-600 leading-relaxed">
                   Madhuraj System Solutions was founded with a vision to provide comprehensive IT solutions 
                   that combine technical expertise with exceptional customer service. Over the years, 
-                  we've grown from a small computer service center to a full-service IT solutions provider.
+                  we&apos;ve grown from a small computer service center to a full-service IT solutions provider.
                 </p>
                 <p className="text-slate-600 leading-relaxed">
                   Our journey has been marked by continuous learning, adaptation to emerging technologies, 
-                  and an unwavering commitment to customer satisfaction. We've built lasting relationships 
+                  and an unwavering commitment to customer satisfaction. We&apos;ve built lasting relationships 
                   with our clients, helping them navigate the ever-evolving technology landscape.
                 </p>
               </div>
@@ -22,7 +22,7 @@ const Story = () => {
             <div className="relative">
               <div className="aspect-square bg-cool rounded-2xl overflow-hidden">
                 <img 
-                  src="/images/about/office.jpg" 
+                  src="/images/mssOfficeOne.jpg" 
                   alt="Our Office" 
                   className="object-cover w-full h-full"
                 />

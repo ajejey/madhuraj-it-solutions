@@ -68,9 +68,10 @@ export default function ProductForm({
         ...initialData,
         price: initialData.price ? initialData.price.toString() : '',
         stock: initialData.stock ? initialData.stock.toString() : '',
-        images: initialData.images ? initialData.images.map(img => 
-          typeof img === 'string' ? getFileUrl(img) : img
-        ) : [],
+        // images: initialData.images ? initialData.images.map(img => 
+        //   typeof img === 'string' ? getFileUrl(img) : img
+        // ) : [],
+        images: initialData.images || [],
         discount: initialData.discount || 0,
         ratings: initialData.ratings || { average: 0, count: 0 },
         isActive: initialData.isActive !== undefined ? initialData.isActive : true
@@ -85,6 +86,8 @@ export default function ProductForm({
       [name]: type === 'checkbox' ? checked : value
     }));
   };
+
+  console.log("formData ", formData);
 
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
@@ -169,8 +172,8 @@ export default function ProductForm({
     }
 
     if (onSubmit) {
-      // If onSubmit is provided (for edit), use it
-      onSubmit(e);
+      // If onSubmit is provided (for edit), pass the formData
+      onSubmit(formData);
     } else {
       // Default create product behavior
       try {
@@ -351,10 +354,12 @@ export default function ProductForm({
           {formData.images && formData.images.map((image, index) => (
             <div key={index} className="relative">
               <img 
-                src={typeof image === 'string' ? image : URL.createObjectURL(image)} 
+                src={typeof image === 'string' ? getFileUrl(image) : URL.createObjectURL(image)} 
+                // src={getFileUrl(image)}
                 alt={`Product Image ${index + 1}`} 
                 className="w-32 h-32 object-cover rounded-lg"
               />
+              {console.log("image inside loop", image)}
               <button
                 type="button"
                 onClick={() => removeImage(index)}
@@ -408,7 +413,7 @@ export default function ProductForm({
             Add Specification
           </button>
         </div>
-        {Object.entries(formData.specifications).length > 0 && (
+        {formData && formData.specifications && Object.entries(formData.specifications).length > 0 && (
           <div className="bg-gray-50 p-4 rounded-lg">
             {Object.entries(formData.specifications).map(([key, value]) => (
               <div key={key} className="flex justify-between items-center mb-2 pb-2 border-b last:border-b-0">

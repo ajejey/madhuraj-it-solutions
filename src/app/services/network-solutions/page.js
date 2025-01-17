@@ -64,16 +64,10 @@ export default function NetworkSolutionsPage() {
           
           <div className="flex space-x-4">
             <Link 
-              href="/services/network-solutions/consultation"
+              href="/contact"
               className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition"
             >
               Request Consultation
-            </Link>
-            <Link 
-              href="/contact"
-              className="border border-primary text-primary px-6 py-2 rounded-full hover:bg-primary-light transition"
-            >
-              Contact Sales
             </Link>
           </div>
         </div>
@@ -209,7 +203,7 @@ export default function NetworkSolutionsPage() {
       {/* Delivery and Support */}
       <section className="bg-cool/10 p-12 rounded-2xl">
         <div className="flex flex-col md:flex-row items-center gap-8">
-          <div className="md:w-1/2">
+          <div>
             <h2 className="text-2xl font-bold mb-4 text-primary flex items-center gap-3">
               <ShieldCheck className="w-10 h-10" /> Comprehensive Support
             </h2>
@@ -237,7 +231,7 @@ export default function NetworkSolutionsPage() {
               Contact Support
             </Link>
           </div>
-          <div className="md:w-1/2 hidden md:block">
+          {/* <div className="md:w-1/2 hidden md:block">
             <Image 
               src="/images/services/network-support.jpg" 
               alt="Network Support" 
@@ -245,7 +239,7 @@ export default function NetworkSolutionsPage() {
               height={400} 
               className="rounded-2xl shadow-lg"
             />
-          </div>
+          </div> */}
         </div>
       </section>
     </div>

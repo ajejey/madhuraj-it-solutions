@@ -36,6 +36,8 @@ export default function OrderCard({ order }) {
   const [currentStatus, setCurrentStatus] = useState(order.orderStatus);
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log('Order:', order);
+
   const handleStatusChange = async (newStatus) => {
     setIsLoading(true);
     try {

@@ -26,7 +26,7 @@ export async function sendOTP(email) {
   // Rate limiting
   const storedData = otpStore.get(email)
   if (storedData && Date.now() - storedData.timestamp < 60000) { // 1 minute
-    throw new Error('Please wait before requesting another OTP')
+    throw new Error('Please wait 1 minute before requesting another OTP')
   }
 
   const otp = Math.floor(100000 + Math.random() * 900000)
@@ -40,14 +40,32 @@ export async function sendOTP(email) {
     await transporter.sendMail({
       from: process.env.EMAIL_FROM,
       to: email,
-      subject: 'Your Festique Login OTP',
+      subject: 'Madhuraj System Solutions - Login Verification',
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h1 style="color: #FF6B6B;">Welcome to Festique</h1>
-          <p>Your OTP for login is: <strong style="font-size: 24px; color: #4ECDC4;">${otp}</strong></p>
-          <p>This OTP will expire in 10 minutes.</p>
-          <hr style="border: 1px solid #eee; margin: 20px 0;" />
-          <p style="color: #666; font-size: 12px;">If you didn't request this OTP, please ignore this email.</p>
+        <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f4f7f6; padding: 30px; border-radius: 12px;">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <img src="https://www.madhurajsystems.com/images/MSSLogo.jpg" alt="Madhuraj System Solutions" style="max-width: 200px; margin: 0 auto;" />
+          </div>
+          <h1 style="color: #2c3e50; text-align: center; font-weight: 600;">Secure Login Verification</h1>
+          <div style="background-color: #ffffff; border-radius: 10px; padding: 25px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <p style="color: #34495e; font-size: 16px; line-height: 1.6;">Hello,</p>
+            <p style="color: #34495e; font-size: 16px; line-height: 1.6;">
+              We received a login request for your Madhuraj System Solutions account. 
+              Please use the following One-Time Password (OTP) to complete your login:
+            </p>
+            <div style="text-align: center; margin: 25px 0;">
+              <span style="display: inline-block; background-color: #3498db; color: white; font-size: 24px; padding: 10px 20px; border-radius: 8px; letter-spacing: 2px;">
+                ${otp}
+              </span>
+            </div>
+            <p style="color: #7f8c8d; font-size: 14px; text-align: center;">
+              This OTP is valid for 10 minutes. Do not share this code with anyone.
+            </p>
+          </div>
+          <div style="margin-top: 20px; text-align: center; color: #7f8c8d; font-size: 12px;">
+            <p>If you did not request this login, please contact our support team immediately.</p>
+            <p> ${new Date().getFullYear()} Madhuraj System Solutions. All rights reserved.</p>
+          </div>
         </div>
       `
     })

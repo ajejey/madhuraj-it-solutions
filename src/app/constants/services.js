@@ -29,7 +29,7 @@ export const services = [
       'Quick Turnaround'
     ],
     image: '/images/services/hardware-repair.jpg',
-    icon: 'Tool',
+    icon: 'Cpu',
   },
   {
     id: 'web-development',
@@ -45,7 +45,7 @@ export const services = [
       'Ongoing Maintenance'
     ],
     image: '/images/services/web-development.jpg',
-    icon: 'Globe',
+    icon: 'CodeXml',
   },
 
   {

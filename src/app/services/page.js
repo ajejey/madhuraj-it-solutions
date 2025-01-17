@@ -1,6 +1,7 @@
 import ServiceHero from './components/ServiceHero';
 import ServiceCategories from './components/ServiceCategories';
 import Testimonials from './components/Testimonials';
+import Footer from '../components/layout/Footer';
 
 export const metadata = {
   title: 'Services - Madhuraj System Solutions',
@@ -12,6 +13,7 @@ export default function ServicesPage() {
     <div className="bg-white">
       <ServiceHero />
       <ServiceCategories />
+      <Footer />
     </div>
   );
 }

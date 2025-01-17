@@ -2,6 +2,7 @@ import ContactHero from './components/ContacttHero';
 import CompanyInfo from './components/CompanyInfo';
 import BusinessHours from './components/BusinessHours';
 import Location from './components/Location';
+import Footer from '../components/layout/Footer';
 
 export default function ContactPage() {
   return (
@@ -10,6 +11,7 @@ export default function ContactPage() {
       <CompanyInfo />
       <BusinessHours />
       <Location />
+      <Footer />
     </div>
   );
 }

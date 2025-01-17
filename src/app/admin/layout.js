@@ -46,7 +46,7 @@ export default async function AdminLayout({ children }) {
   try {
     console.log("Entering admin layout");
     const user = await requireRole(['admin']);
-    console.log("Admin role verified for user:", user);
+    // console.log("Admin role verified for user:", user);
 
     if (!user) {
       console.log("No user found, redirecting to login");

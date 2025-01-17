@@ -59,7 +59,7 @@ export default function WebDevelopmentPage() {
             </Link>
             <Link 
               href="/portfolio"
-              className="border border-primary text-primary px-6 py-2 rounded-full hover:bg-primary-light transition"
+              className="border border-primary text-primary px-6 py-2 rounded-full hover:bg-primary-light hover:text-white transition"
             >
               View Portfolio
             </Link>

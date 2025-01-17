@@ -192,7 +192,7 @@ export default function RootLayout({ children }) {
             {children}
           </CartProvider>
         </main>
-        <Footer />
+        {/* <Footer /> */}
         <WhatsAppButton />
       </body>
     </html>

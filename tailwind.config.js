@@ -56,6 +56,20 @@ module.exports = {
           '2xl': '6rem',
         },
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      keyframes: {
+        'infinite-scroll-left': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        'infinite-scroll-left': 'infinite-scroll-left 20s linear infinite',
+      },
     },
   },
   plugins: [],

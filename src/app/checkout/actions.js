@@ -7,56 +7,20 @@ import { Product } from '@/models/Product';
 import { connectDB } from '@/app/lib/db';
 
 export async function createOrder(formData) {
-  await connectDB();
-  
-  // Verify authentication
-  const user = await requireAuth();
-  
   try {
-    console.log('Received form data:', formData);
+    // Verify authentication
+    const user = await requireAuth();
+    
+    // Connect to database
+    await connectDB();
 
+    // Validate order data
     if (!formData.items || !Array.isArray(formData.items) || formData.items.length === 0) {
       throw new Error('No items in cart');
     }
 
-    // Fetch current product details and validate
-    const orderItems = await Promise.all(
-      formData.items.map(async (item) => {
-        console.log('Processing item:', item);
-
-        if (!item.product) {
-          throw new Error('Product ID is required');
-        }
-
-        const product = await Product.findById(item.product);
-        console.log('Found product:', product);
-
-        if (!product) {
-          throw new Error(`Product not found: ${item.product}`);
-        }
-        
-        // Use current product price
-        const currentPrice = product.discountedPrice;
-        
-        if (typeof item.quantity !== 'number' || item.quantity < 1) {
-          throw new Error('Invalid quantity');
-        }
-
-        return {
-          product: product._id,
-          quantity: item.quantity,
-          price: currentPrice
-        };
-      })
-    );
-
-    console.log('Processed order items:', orderItems);
-
-    // Calculate total amount from current prices
-    const totalAmount = orderItems.reduce(
-      (total, item) => total + (item.price * item.quantity),
-      0
-    );
+    // Calculate total amount
+    const totalAmount = await calculateOrderTotal(formData.items);
 
     // Validate shipping address
     if (!formData.fullName || !formData.addressLine1 || !formData.city || 
@@ -67,7 +31,7 @@ export async function createOrder(formData) {
     // Create the order with validated data
     const order = await Order.create({
       user: user.id,
-      items: orderItems,
+      items: formData.items,
       totalAmount,
       shippingAddress: {
         fullName: formData.fullName,
@@ -83,8 +47,6 @@ export async function createOrder(formData) {
         status: 'pending'
       }
     });
-
-    console.log('Created order:', order);
 
     // Update user's phone number if different
     if (user.phoneNumber !== formData.phoneNumber) {
@@ -125,7 +87,7 @@ export async function createOrder(formData) {
     const plainOrder = {
       id: order._id.toString(),
       user: user.id,
-      items: orderItems.map(item => ({
+      items: order.items.map(item => ({
         product: item.product.toString(),
         quantity: item.quantity,
         price: item.price
@@ -154,4 +116,27 @@ export async function createOrder(formData) {
     console.error('Order creation failed:', error);
     throw new Error(error.message || 'Failed to create order. Please try again.');
   }
+}
+
+async function calculateOrderTotal(items) {
+  let total = 0;
+  
+  // Fetch product details and calculate total
+  for (const item of items) {
+    const product = await Product.findById(item.product);
+    
+    if (!product) {
+      throw new Error(`Product not found: ${item.product}`);
+    }
+    
+    // Validate quantity
+    if (item.quantity <= 0) {
+      throw new Error(`Invalid quantity for product: ${item.product}`);
+    }
+    
+    // Calculate item total
+    total += product.discountedPrice * item.quantity;
+  }
+  
+  return total;
 }

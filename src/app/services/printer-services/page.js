@@ -53,17 +53,17 @@ export default function PrinterServicesPage() {
           
           <div className="flex space-x-4">
             <Link 
-              href="/services/printer-services/consultation"
+              href="/contact"
               className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition"
             >
               Schedule Service
             </Link>
-            <Link 
+            {/* <Link 
               href="/contact"
               className="border border-primary text-primary px-6 py-2 rounded-full hover:bg-primary-light transition"
             >
               Contact Support
-            </Link>
+            </Link> */}
           </div>
         </div>
         {/* <iframe src="https://lottie.host/embed/0399a75c-fdcc-437c-bec9-da537f81218c/fKTDOShosd.lottie"></iframe> */}
@@ -198,7 +198,7 @@ export default function PrinterServicesPage() {
       {/* Delivery and Support */}
       <section className="bg-cool/10 p-12 rounded-2xl">
         <div className="flex flex-col md:flex-row items-center gap-8">
-          <div className="md:w-1/2">
+          <div>
             <h2 className="text-2xl font-bold mb-4 text-primary flex items-center gap-3">
               <ShieldCheck className="w-10 h-10" /> Comprehensive Support
             </h2>
@@ -226,7 +226,7 @@ export default function PrinterServicesPage() {
               Contact Support
             </Link>
           </div>
-          <div className="md:w-1/2 hidden md:block">
+          {/* <div className="md:w-1/2 hidden md:block">
             <Image 
               src="/images/services/printer-support.jpg" 
               alt="Printer Support" 
@@ -234,7 +234,7 @@ export default function PrinterServicesPage() {
               height={400} 
               className="rounded-2xl shadow-lg"
             />
-          </div>
+          </div> */}
         </div>
       </section>
     </div>

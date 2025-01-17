@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useTransition } from 'react';
+import { useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { updateProduct } from '../../../actions';
@@ -9,14 +9,11 @@ import ProductForm from '../../../create/components/CreateProductForm';
 export default function EditProductForm({ initialData }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  const [formData, setFormData] = useState(initialData);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
+  const handleSubmit = async (formData) => {
     startTransition(async () => {
       try {
-        const result = await updateProduct(initialData._id, formData);
+        const result = await updateProduct(initialData.id, formData);
         
         if (result.success) {
           toast.success('Product updated successfully');
