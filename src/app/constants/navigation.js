@@ -45,7 +45,7 @@ export const footerNavigation = {
   ],
   legal: [
     { name: 'Privacy Policy', href: '/privacy-policy' },
-    { name: 'Terms of Service', href: '/terms-of-service' },
+    { name: 'Terms of Service', href: '/terms-and-conditions' },
   ],
   social: [
     {

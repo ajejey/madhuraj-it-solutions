@@ -172,7 +172,7 @@ const Footer = () => {
                 Privacy Policy
               </Link>
               <Link
-                href="/terms"
+                href="/terms-and-conditions"
                 className="text-slate-400 hover:text-white text-sm transition-colors"
               >
                 Terms of Service
