@@ -1,4 +1,5 @@
 import { MapPin, Phone, Mail } from 'lucide-react';
+import Link from 'next/link';
 
 const CompanyInfo = () => {
   return (
@@ -24,15 +25,17 @@ const CompanyInfo = () => {
             <div className="bg-cool/50 rounded-2xl p-8">
               <h3 className="text-xl text-primary font-bold mb-6">Contact Information</h3>
               <div className="space-y-4">
+                <Link href="https://maps.app.goo.gl/yCNwTuwuUiUPrvHDA" target="_blank" rel="noopener noreferrer">
                 <div className="flex items-start gap-4">
                   <MapPin className="w-5 h-5 text-secondary mt-1 flex-shrink-0" />
-                  <p className="text-slate-600">
-                    11, 1st floor, 12th Cross Rd, opp. to HDFC Bank,<br />
-                    Remco Bhel Layout, Ideal Homes Twp,<br />
+                  <p className="text-slate-600 hover:text-primary transition-colors">
+                    No.11, 1st floor, 12th Cross Road, opposite to HDFC Bank,<br />
+                    Remco Bhel Layout, Ideal Homes Township,<br />
                     Rajarajeshwari Nagar, Bengaluru,<br />
                     Karnataka 560098
                   </p>
                 </div>
+                </Link>
                 <div className="flex items-center gap-4">
                   <Phone className="w-5 h-5 text-secondary flex-shrink-0" />
                   <a 

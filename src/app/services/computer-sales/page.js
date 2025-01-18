@@ -111,7 +111,7 @@ export default function ComputerSalesPage() {
           {computerCategories.map((category, index) => (
             <Link 
               key={index} 
-              href={`/services/computer-sales/${category.title.toLowerCase().replace(' ', '-')}`}
+              href={`/products`}
               className="group"
             >
               <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all text-center">

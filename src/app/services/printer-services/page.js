@@ -100,7 +100,7 @@ export default function PrinterServicesPage() {
           {printerServices.map((service, index) => (
             <Link 
               key={index} 
-              href={`/services/printer-services/${service.title.toLowerCase().replace(' ', '-')}`}
+              href={`/contact`}
               className="group"
             >
               <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all text-center">

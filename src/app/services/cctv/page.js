@@ -102,7 +102,7 @@ export default function CCTVServicesPage() {
           {cctvServices.map((service, index) => (
             <Link 
               key={index} 
-              href={`/services/cctv/${service.title.toLowerCase().replace(' ', '-')}`}
+              href={`/contact`}
               className="group"
             >
               <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all text-center">

@@ -20,8 +20,8 @@ const WhatsAppButton = () => {
     <>
       {isVisible && (
         <div 
-          className="fixed bottom-6 right-6 z-50 animate-bounce"
-          style={{ animationDuration: '2s' }}
+          className="fixed bottom-6 right-6 z-50"
+          // style={{ animationDuration: '2s' }}
         >
           <button
             onClick={handleClick}

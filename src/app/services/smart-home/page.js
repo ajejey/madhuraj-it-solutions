@@ -111,7 +111,7 @@ export default function SmartHomeServicesPage() {
           {smartHomeServices.map((service, index) => (
             <Link 
               key={index} 
-              href={`/services/smart-home/${service.title.toLowerCase().replace(' ', '-')}`}
+              href={`/contact`}
               className="group"
             >
               <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all text-center">

@@ -58,10 +58,10 @@ export default function WebDevelopmentPage() {
               Get Started
             </Link>
             <Link 
-              href="/portfolio"
+              href="/contact"
               className="border border-primary text-primary px-6 py-2 rounded-full hover:bg-primary-light hover:text-white transition"
             >
-              View Portfolio
+              Contact Us
             </Link>
           </div>
         </div>

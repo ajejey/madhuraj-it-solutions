@@ -31,22 +31,33 @@ export const metadata = {
     default: 'Madhuraj System Solutions - IT Services & Computer Sales in Rajarajeshwari Nagar, Bangalore',
     template: '%s | Madhuraj System Solutions'
   },
-  description: 'Leading IT service provider in Rajarajeshwari Nagar, Bangalore. Expert CCTV installation, computer sales & repair, networking solutions, data recovery, and smart home automation. Trusted by 1000+ customers in RR Nagar.',
+  description: 'Leading IT service provider specializing in computer sales, repair, and professional web development. Expert solutions for computer services, networking, CCTV, smart home automation, and custom web applications in Rajarajeshwari Nagar, Bangalore. Full-stack web development using modern technologies like Next.js and React.',
   keywords: [
-    'computer repair Rajarajeshwari Nagar',
-    'CCTV installation Bangalore',
+    // Computer Sales Priority
+    'computer sales Rajarajeshwari Nagar',
     'laptop sales RR Nagar',
-    'IT services Bangalore',
-    'computer service center RR Nagar',
-    'data recovery Bangalore',
-    'smart home automation',
-    'networking solutions Bangalore',
-    'computer AMC services',
-    'CCTV camera installation near me',
     'used laptop dealer Bangalore',
-    'computer repair shop RR Nagar',
-    'IT support Rajarajeshwari Nagar',
-    'printer repair Bangalore',
+    
+    // Computer Repair Priority
+    'computer repair Bangalore',
+    'computer service center RR Nagar',
+    'computer repair shop Rajarajeshwari Nagar',
+    'laptop repair services',
+    
+    // Web Development Priority
+    'web development services Bangalore',
+    'custom web application development',
+    'next.js web development',
+    'react web development',
+    'responsive website design',
+    
+    // Additional Services
+    'IT services Bangalore',
+    'networking solutions',
+    'smart home automation',
+    'CCTV installation',
+    'data recovery services',
+    'printer repair',
     'security system installation'
   ],
   authors: [{ name: 'Bharath', url: 'https://madhurajsystems.com' }],
@@ -62,7 +73,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'Madhuraj System Solutions - Your Trusted IT Partner in Bangalore',
-    description: 'Expert IT services, CCTV installation, computer sales & repair in Rajarajeshwari Nagar, Bangalore. Visit our showroom near HDFC Bank, RR Nagar.',
+    description: 'Expert IT services, computer sales & repair, CCTV installation, and web development in Rajarajeshwari Nagar, Bangalore. Visit our showroom near HDFC Bank, RR Nagar.',
     url: 'https://madhurajsystems.com',
     siteName: 'Madhuraj System Solutions',
     locale: 'en_IN',
@@ -107,7 +118,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Madhuraj System Solutions - IT Services in Bangalore',
-    description: 'Professional IT services, CCTV installation & computer solutions in RR Nagar, Bangalore. Expert team led by Mr. Bharath.',
+    description: 'Professional IT services, computer solutions & repair, CCTV installation, and web development in Rajarajeshwari Nagar, Bangalore. Expert team led by Mr. Bharath.',
     images: ['https://madhurajsystems.com/opengraph-image.jpg'], // Add your Twitter card image
   },
   other: {
